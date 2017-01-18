@@ -160,13 +160,14 @@ namespace Leopold;
       $sql = "select * from role";
       return $this->executerRequeteAvecResultat($sql);
     }
-    function affiche_role($id){
-      $sql = "select role.id,name,count(*) as nb_admin from role join user on user.idrole = role.id where role.id=$id";
+    function affiche_role($ordre){
+      $sql = "select role.id,name,count(*) as nb_role from role join user on user.idrole = role.id group by (name) order by $ordre";
       return $this->executerRequeteAvecResultat($sql);
     }
     function nb_role(){
       $sql = "select count(*) as nb_role from role";
       return $this->executerRequeteAvecResultat($sql);
     }
+
 }
 ?>

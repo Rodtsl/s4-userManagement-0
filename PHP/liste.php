@@ -11,10 +11,7 @@
    }
 
    //print_r2($db);
-  $role= $db->affiche_role(1);
-  $role= $db->affiche_role(2);
-  $role= $db->affiche_role(3);
-print_r2($role);
+
 
 
 
@@ -27,13 +24,12 @@ print_r2($role);
    <div class="col-xs-6 col-md-4">nb Users</div>
    <div class="col-xs-6 col-md-4">Action</div>
  </div>
- <div class="row">
-   <div class="col-xs-6 col-md-4"> 1</div>
-   <div class="col-xs-6 col-md-4">2</div>
-   <div class="col-xs-6 col-md-4">3</div>
- </div>
- <div class="row">
-  <div class="col-xs-6 col-md-4">4</div>
-  <div class="col-xs-6 col-md-4">5</div>
-  <div class="col-xs-6 col-md-4">6</div>
-</div>
+ <?php
+ $role = $db->affiche_role("name");
+     foreach($role as $role) // résultat du tris des nom
+     {
+       echo '<div class="row"><div class="col-xs-6 col-md-4">',$role['name'],'</div><div class="col-xs-6 col-md-4">',$role['nb_role'],"</div>
+         <td><input type='submit' name='suprimer_",$role['id'],"' value='Supprimer' id='suppr' onClick=\"getname(this)\"></td>
+         <td><input type='submit' name='ajouter_",$role['id'],"' value='Ajouter' id='suppr' onClick=\"getname(this)\"></td></tr>";
+    }
+?>
