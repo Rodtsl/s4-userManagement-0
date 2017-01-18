@@ -1,4 +1,5 @@
 <?php
+namespace Leopold;
   /**
    * Modèle
    * Database.class.php
@@ -6,7 +7,7 @@
    * Méthodes liées à l'accès à la base de donnée.
    */
 
-  namespace ETU2_41;
+
 
   use PDO;
   use PDOException;
@@ -20,14 +21,6 @@
    *
    * @package SDN
    */
-  function print_r2($val){
-     echo "<PRE>";
-     print_r($val);
-     echo "</PRE>";
-
-   }
-
-
   class BaseDB
   {
 
@@ -37,7 +30,6 @@
     private $password;
     private $database;
     private $host;
-
 
     /**
      * Créé une nouvelle instance du gestionnaire de base de données.
@@ -62,8 +54,8 @@
     {
       try {
         //connexion à la base de données
-        $this->db = new PDO('oci:dbname=' . $this->host . ';dbname=' . $this->database.';charset=utf8',
-      $this->username, $this->password /*array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'')*/);
+        $this->db = new PDO('mysql:dbname=' . $this->host . ';dbname=' . $this->database.';charset=UTF8',
+          $this->username, $this->password, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
 
         if (DEBUG_PDO) {
           $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -106,8 +98,6 @@
       $this->db->commit();
     }
 
-
-
     /**
      * Exécute une requête retournant des lignes sur la base de données Oracle.
      *
@@ -142,7 +132,6 @@
 
       if (!$succes) {
         $error = $stmt->errorInfo();
-        echo "requete pas execute";
         throw new PDOException($error[0] . ': ' . $error[2]);
       }
 
@@ -167,11 +156,17 @@
     {
       parent::__construct(BDD_USERNAME, BDD_PASSWORD, BDD_DATABASE, BDD_HOSTNAME);
     }
-
-    function afficheCoureur()
-    {
-      $sql = "SELECT * FROM tdf_coureur";
+    function test(){
+      $sql = "select * from role";
       return $this->executerRequeteAvecResultat($sql);
     }
-  }
+    function affiche_role($id){
+      $sql = "select role.id,name,count(*) as nb_admin from role join user on user.idrole = role.id where role.id=$id";
+      return $this->executerRequeteAvecResultat($sql);
+    }
+    function nb_role(){
+      $sql = "select count(*) as nb_role from role";
+      return $this->executerRequeteAvecResultat($sql);
+    }
+}
 ?>

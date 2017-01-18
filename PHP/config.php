@@ -11,7 +11,7 @@
   // Configuration de la base de données MySQL
   define('BDD_USERNAME', 'leopold_rodts');                 //nom d'utilisateur
   define('BDD_PASSWORD', 'ijeengie');                     //mot de passe
-  define('BDD_HOSTNAME', 'leopold_rodts');            //nom d'hôte du serveur MySQL
+  define('BDD_HOSTNAME', 'localhost');            //nom d'hôte du serveur MySQL
   define('BDD_DATABASE', 'leopold_rodts');     //nom de la base de données
 
   // Affiche chaque requête SQL sur la page.
